@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuzzBoard - Notifications</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="topbar">
+        <div class="nav-content">
+            <div class="brand">
+                <i class="ri-bubble-chart-fill" style="color:var(--primary);"></i> BuzzBoard
+            </div>
+            <div class="nav-right" style="display:flex;gap:16px;align-items:center;">
+                <a href="index.html" class="btn btn-secondary"><i class="ri-arrow-left-line"></i> Back to Feed</a>
+                <div class="avatar" id="navAvatar">U</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="main-layout">
+            <!-- LEFT SIDEBAR -->
+            <aside class="left-sidebar">
+                <div class="card sidebar-card">
+                    <div class="user-mini-profile">
+                        <div class="avatar avatar-lg" id="sideAvatar" style="margin:0 auto 12px;">U</div>
+                        <h3 id="sideName" style="margin-bottom:4px;font-size:1.1rem;">User Name</h3>
+                        <p id="sideEmail" style="color:var(--text-muted);font-size:0.9rem;">user@email.com</p>
+                    </div>
+                    <nav style="display:flex;flex-direction:column;gap:4px;">
+                        <a href="index.html" class="menu-link">
+                            <i class="ri-home-4-line"></i> Home Feed
+                        </a>
+                        <a href="notifications.html" class="menu-link active">
+                            <i class="ri-notification-3-fill"></i> Notifications
+                        </a>
+                        <a href="users.html" class="menu-link">
+                            <i class="ri-group-line"></i> People
+                        </a>
+                        <a href="profile.html" class="menu-link">
+                            <i class="ri-user-3-line"></i> My Profile
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- MAIN CONTENT -->
+            <main class="main-feed">
+                <div class="card">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+                        <h2 style="font-size:1.5rem;">Notifications</h2>
+                        <button class="btn btn-secondary" id="markAllRead" style="font-size:0.85rem;">Mark all as
+                            read</button>
+                    </div>
+
+                    <div id="notificationsList" style="display:flex;flex-direction:column;gap:12px;">
+                        <!-- Notifications injected here -->
+                    </div>
+                </div>
+            </main>
+
+            <!-- RIGHT SIDEBAR -->
+            <aside class="right-sidebar">
+                <div class="card sidebar-card">
+                    <h3 style="font-size:1.1rem;margin-bottom:16px;">Suggested for you</h3>
+                    <div style="display:flex;flex-direction:column;gap:16px;">
+                        <div style="display:flex;gap:12px;align-items:center;">
+                            <div class="avatar avatar-sm" style="background:var(--warning)">JS</div>
+                            <div>
+                                <div style="font-weight:600;">JS Daily</div>
+                                <button class="btn btn-secondary"
+                                    style="padding:4px 10px;font-size:0.75rem;margin-top:4px;">Follow</button>
+                            </div>
+                        </div>
+                        <div style="display:flex;gap:12px;align-items:center;">
+                            <div class="avatar avatar-sm" style="background:var(--success)">D</div>
+                            <div>
+                                <div style="font-weight:600;">Design Hub</div>
+                                <button class="btn btn-secondary"
+                                    style="padding:4px 10px;font-size:0.75rem;margin-top:4px;">Follow</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script src="notifications.js"></script>
+</body>
+
+</html>

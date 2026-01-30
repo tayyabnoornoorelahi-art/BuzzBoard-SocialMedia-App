@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuzzBoard - Profile</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        /* Profile Specific Overrides */
+        .profile-header {
+            text-align: center;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-pic-lg {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--bg-card);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+            object-fit: cover;
+            margin-bottom: 16px;
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .profile-email {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .profile-bio {
+            max-width: 600px;
+            margin: 0 auto 24px;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: 0.2s;
+            display: block;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="topbar">
+        <div class="nav-content">
+            <div class="brand">
+                <i class="ri-bubble-chart-fill" style="color:var(--primary);"></i> BuzzBoard
+            </div>
+            <div class="nav-right">
+                <a href="index.html" class="btn btn-secondary"><i class="ri-arrow-left-line"></i> Back to Feed</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="main-layout" style="grid-template-columns: 1fr;">
+            <div class="card" style="max-width:800px;margin:0 auto;width:100%;padding:0;">
+                <!-- Profile Header -->
+                <div class="profile-header">
+                    <img id="profileImage" src="" class="profile-pic-lg" alt="Profile">
+                    <h1 id="welcomeName" class="profile-name">User Name</h1>
+                    <p id="welcomeEmail" class="profile-email">user@example.com</p>
+                    <p id="userDesc" class="profile-bio">No description yet.</p>
+
+                    <button id="editProfileBtn" class="btn btn-secondary" style="margin-bottom:20px;">
+                        <i class="ri-edit-line"></i> Edit Profile
+                    </button>
+
+                    <!-- Stats Section -->
+                    <div class="profile-stats"
+                        style="display:flex;justify-content:center;gap:40px;margin-top:20px;border-top:1px solid rgba(255,255,255,0.1);padding-top:20px;width:100%;">
+                        <div id="followingStat" style="cursor:pointer;text-align:center;">
+                            <span id="followingCount" style="font-size:1.5rem;font-weight:700;display:block;">0</span>
+                            <span style="color:var(--text-muted);font-size:0.9rem;">Following</span>
+                        </div>
+                        <div id="followersStat" style="cursor:pointer;text-align:center;">
+                            <span id="followersCount" style="font-size:1.5rem;font-weight:700;display:block;">0</span>
+                            <span style="color:var(--text-muted);font-size:0.9rem;">Followers</span>
+                        </div>
+                        <div style="text-align:center;">
+                            <span id="likesCount" style="font-size:1.5rem;font-weight:700;display:block;">0</span>
+                            <span style="color:var(--text-muted);font-size:0.9rem;">Likes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content (Liked Posts) -->
+            <div style="max-width:800px;margin:20px auto;width:100%;">
+                <h3 style="margin-bottom:16px;padding-left:10px;border-left:4px solid var(--primary);">Liked Posts</h3>
+                <div id="tabContent" style="min-height:200px;">
+                    <!-- Content injected via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- USER LIST MODAL -->
+    <div id="userListModal" class="modal-overlay">
+        <div class="modal-box" style="max-width:400px;max-height:80vh;display:flex;flex-direction:column;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                <h2 id="userListTitle" style="font-size:1.2rem;">Users</h2>
+                <span id="closeUserList" style="cursor:pointer;font-size:1.5rem;color:var(--text-muted);">&times;</span>
+            </div>
+            <div id="userListContent" style="overflow-y:auto;flex:1;">
+                <!-- User list injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- EDIT PROFILE MODAL -->
+    <div id="editPopup" class="modal-overlay">
+        <div class="modal-box">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+                <h2 style="font-size:1.5rem;">Edit Profile</h2>
+                <span id="closePopup" style="cursor:pointer;font-size:1.5rem;color:var(--text-muted);">&times;</span>
+            </div>
+
+            <label class="upload-area">
+                <input type="file" id="uploadPhoto" accept="image/*">
+                <i class="ri-upload-cloud-2-line" style="font-size:2rem;color:var(--primary);margin-bottom:8px;"></i>
+                <p style="color:var(--text-muted);">Click to upload new picture</p>
+            </label>
+
+            <div style="display:flex;flex-direction:column;gap:16px;">
+                <input type="text" id="editName" placeholder="Full Name"
+                    style="width:100%;padding:12px;background:var(--bg-input);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:white;">
+                <input type="text" id="editEmail" placeholder="Email Address" readonly
+                    style="width:100%;padding:12px;background:var(--bg-input);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:rgba(255,255,255,0.5);cursor:not-allowed;">
+                <textarea id="editDesc" rows="3" placeholder="Tell us about yourself..."
+                    style="width:100%;padding:12px;background:var(--bg-input);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:white;resize:vertical;"></textarea>
+            </div>
+
+            <div style="display:flex;gap:12px;margin-top:24px;justify-content:flex-end;">
+                <button id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                <button id="saveBtn" class="btn btn-primary">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="profile.js"></script>
+</body>
+
+</html>

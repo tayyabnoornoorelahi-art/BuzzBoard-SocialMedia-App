@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuzzBoard - People</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="topbar">
+        <div class="nav-content">
+            <div class="brand">
+                <i class="ri-bubble-chart-fill" style="color:var(--primary);"></i> BuzzBoard
+            </div>
+            <div class="search-bar">
+                <i class="ri-search-line"></i>
+                <input id="searchUsers" type="text" placeholder="Search people...">
+            </div>
+            <div style="display:flex;gap:16px;align-items:center;">
+                <div class="avatar" id="navAvatar">U</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="main-layout">
+            <!-- LEFT SIDEBAR -->
+            <aside class="left-sidebar">
+                <div class="card sidebar-card">
+                    <div class="user-mini-profile">
+                        <div class="avatar avatar-lg" id="sideAvatar" style="margin:0 auto 12px;">U</div>
+                        <h3 id="sideName" style="margin-bottom:4px;font-size:1.1rem;">User Name</h3>
+                        <p id="sideEmail" style="color:var(--text-muted);font-size:0.9rem;">user@email.com</p>
+                    </div>
+                    <nav style="display:flex;flex-direction:column;gap:4px;">
+                        <a href="index.html" class="menu-link">
+                            <i class="ri-home-4-line"></i> Home Feed
+                        </a>
+                        <a href="notifications.html" class="menu-link">
+                            <i class="ri-notification-3-line"></i> Notifications
+                        </a>
+                        <a href="users.html" class="menu-link active">
+                            <i class="ri-group-fill"></i> People
+                        </a>
+                        <a href="profile.html" class="menu-link">
+                            <i class="ri-user-3-line"></i> My Profile
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- MAIN CONTENT -->
+            <main class="main-feed">
+                <div class="card">
+                    <h2 style="margin-bottom:20px;font-size:1.5rem;">People on BuzzBoard</h2>
+                    <div id="usersList" style="display:flex;flex-direction:column;gap:16px;">
+                        <!-- Users injected here -->
+                    </div>
+                </div>
+            </main>
+
+            <!-- RIGHT SIDEBAR -->
+            <aside class="right-sidebar">
+                <div class="card sidebar-card">
+                    <h3 style="font-size:1.1rem;margin-bottom:16px;">Suggested</h3>
+                    <p style="color:var(--text-muted);font-size:0.9rem;">Connect with more people to see their buzz!</p>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="users.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BuzzBoard - Premium Social</title>
+  <link rel="stylesheet" href="index.css">
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <div class="topbar">
+    <div class="nav-content">
+      <div class="brand">
+        <i class="ri-bubble-chart-fill" style="color:var(--primary);"></i> BuzzBoard
+      </div>
+
+      <div class="search-bar">
+        <i class="ri-search-line"></i>
+        <input id="searchInput" type="text" placeholder="Search for buzz, people, or trends...">
+      </div>
+
+      <div style="display:flex;gap:16px;align-items:center;">
+        <button class="btn btn-secondary" id="exportBtn" style="padding:8px 16px;font-size:0.85rem;"
+          title="Export Data">
+          <i class="ri-download-line"></i> Export
+        </button>
+        <button class="btn btn-secondary" id="importBtn" style="padding:8px 16px;font-size:0.85rem;"
+          title="Import Data">
+          <i class="ri-upload-line"></i> Import
+        </button>
+        <input type="file" id="importFile" accept=".json" style="display:none;">
+        <button class="btn btn-primary" id="newPostBtn" onclick="document.getElementById('quickText').focus()"><i
+            class="ri-add-line"></i> New Post</button>
+        <div class="avatar" id="navAvatar">U</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="main-layout">
+
+      <!-- LEFT SIDEBAR -->
+      <aside class="left-sidebar">
+        <div class="card sidebar-card">
+          <div class="user-mini-profile">
+            <div class="avatar avatar-lg" id="sideAvatar" style="margin:0 auto 12px;">U</div>
+            <h3 id="sideName" style="margin-bottom:4px;font-size:1.1rem;">User Name</h3>
+            <p id="sideEmail" style="color:var(--text-muted);font-size:0.9rem;">user@email.com</p>
+          </div>
+
+          <nav style="display:flex;flex-direction:column;gap:4px;">
+            <a href="index.html" class="menu-link active">
+              <i class="ri-home-4-fill"></i> Home Feed
+            </a>
+            <a href="notifications.html" class="menu-link">
+              <i class="ri-notification-3-line"></i> Notifications
+            </a>
+            <a href="users.html" class="menu-link">
+              <i class="ri-group-line"></i> People
+            </a>
+            <a href="profile.html" class="menu-link">
+              <i class="ri-user-3-line"></i> My Profile
+            </a>
+          </nav>
+
+          <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05);">
+            <a href="profile.html" class="btn btn-secondary" style="width:100%;justify-content:center;">
+              <i class="ri-pencil-line" style="margin-right:8px;"></i> Edit Profile
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN FEED -->
+      <main class="main-feed">
+        <!-- Create Post -->
+        <div class="card create-post-card">
+          <div class="compose-area">
+            <div class="avatar" id="composeAvatar">U</div>
+            <textarea id="quickText" class="compose-input" placeholder="What's happening?"></textarea>
+          </div>
+          <div class="compose-actions">
+            <div style="display:flex;gap:10px;">
+              <input id="quickImage" placeholder="Image URL (optional)"
+                style="background:var(--bg-input);border:none;padding:8px 12px;border-radius:20px;color:white;font-size:0.85rem;width:200px;">
+            </div>
+            <button id="postQuick" class="btn btn-primary">Post Buzz</button>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div style="display:flex;gap:10px;margin-bottom:24px;">
+          <button class="btn btn-secondary" style="border-radius:20px;padding:6px 16px;font-size:0.85rem;"
+            data-sort="latest">Latest</button>
+          <button class="btn btn-secondary" style="border-radius:20px;padding:6px 16px;font-size:0.85rem;"
+            data-sort="popular">Popular</button>
+          <button class="btn btn-secondary" style="border-radius:20px;padding:6px 16px;font-size:0.85rem;"
+            data-sort="media">Media</button>
+        </div>
+
+        <!-- Feed -->
+        <div id="feed">
+          <!-- Posts injected here -->
+        </div>
+      </main>
+
+      <!-- RIGHT SIDEBAR -->
+      <aside class="right-sidebar">
+        <div class="card sidebar-card">
+          <h3
+            style="font-size:1.1rem;margin-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.05);padding-bottom:12px;">
+            Trending</h3>
+
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div style="display:flex;gap:12px;">
+              <div style="font-size:1.5rem;font-weight:700;color:rgba(255,255,255,0.1);">01</div>
+              <div>
+                <div style="font-weight:600;margin-bottom:2px;">#WebDesign</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);">24.5k Posts</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;">
+              <div style="font-size:1.5rem;font-weight:700;color:rgba(255,255,255,0.1);">02</div>
+              <div>
+                <div style="font-weight:600;margin-bottom:2px;">#CodingLife</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);">18.2k Posts</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;">
+              <div style="font-size:1.5rem;font-weight:700;color:rgba(255,255,255,0.1);">03</div>
+              <div>
+                <div style="font-weight:600;margin-bottom:2px;">#TechNews</div>
+                <div style="font-size:0.85rem;color:var(--text-muted);">12.1k Posts</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- Edit Modal -->
+  <div class="modal-overlay" id="editModal"
+    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(5px);align-items:center;justify-content:center;z-index:2000;">
+    <div class="card" style="width:100%;max-width:500px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <h3>Edit Post</h3>
+        <button class="close-btn" id="cancelEdit"
+          style="background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;"><i
+            class="ri-close-line"></i></button>
+      </div>
+      <textarea id="editText" rows="4"
+        style="margin-bottom:16px;width:100%;background:var(--bg-input);border:none;padding:12px;border-radius:8px;color:white;resize:vertical;"></textarea>
+      <input id="editImage" placeholder="Image URL..."
+        style="margin-bottom:24px;width:100%;background:var(--bg-input);border:none;padding:12px;border-radius:8px;color:white;">
+      <div style="display:flex;justify-content:flex-end;gap:12px;">
+        <button class="btn btn-secondary"
+          onclick="document.getElementById('editModal').style.display='none'">Cancel</button>
+        <button id="saveEdit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>
